@@ -22,6 +22,7 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Material(
       child: Column(
         children: [
@@ -41,10 +42,14 @@ class LandingPage extends StatelessWidget {
           ),
           SizedBox(height: 20),
           SizedBox(
-              width: 450,
+              width: width > 680 ? 680 : width * 0.95,
               child: FlatButton(
+                padding: EdgeInsets.symmetric(vertical: 20),
                 onPressed: () {},
-                child: Text("Instagram"),
+                child: Text(
+                  "Instagram",
+                  style: TextStyle(fontSize: 16),
+                ),
                 color: Colors.tealAccent,
               ))
         ],
