@@ -40,13 +40,17 @@ class LandingPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          ButtonLink(title: "Instagram"),
-          ButtonLink(title: "Twitter"),
+          for (var document in documents) ButtonLink(title: document['title']),
         ],
       ),
     );
   }
 }
+
+final documents = [
+  {'title': 'Instagram'},
+  {'title': 'Twitter'},
+];
 
 class ButtonLink extends StatelessWidget {
   const ButtonLink({
