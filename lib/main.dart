@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,7 +41,11 @@ class LandingPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          for (var document in documents) ButtonLink(title: document['title']),
+          for (var document in documents)
+            ButtonLink(
+              title: document['title'],
+              url: document['url'],
+            ),
         ],
       ),
     );
@@ -48,17 +53,19 @@ class LandingPage extends StatelessWidget {
 }
 
 final documents = [
-  {'title': 'Instagram'},
-  {'title': 'Twitter'},
+  {'title': 'Instagram', 'url': 'https://www.instagram.com/jonathan_naoki_/'},
+  {'title': 'Twitter', 'url': 'https://twitter.com/Naoki_Dohi_0209'},
 ];
 
 class ButtonLink extends StatelessWidget {
   const ButtonLink({
     Key key,
     @required this.title,
+    @required this.url,
   }) : super(key: key);
 
   final String title;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +76,7 @@ class ButtonLink extends StatelessWidget {
           width: width > 680 ? 680 : width * 0.95,
           child: FlatButton(
             padding: EdgeInsets.symmetric(vertical: 20),
-            onPressed: () {},
+            onPressed: () => launch(url),
             child: Text(
               title,
               style: TextStyle(fontSize: 16),
