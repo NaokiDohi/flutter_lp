@@ -24,6 +24,9 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 35,
+        ),
         CircleAvatar(
           backgroundImage: NetworkImage(imageUrl),
           backgroundColor: Colors.white,
