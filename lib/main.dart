@@ -22,17 +22,29 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 35,
-        ),
-        CircleAvatar(
-          backgroundImage: NetworkImage(imageUrl),
-          backgroundColor: Colors.white,
-          radius: 48,
-        )
-      ],
+    return Material(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 35,
+          ),
+          CircleAvatar(
+            backgroundImage: NetworkImage(imageUrl),
+            backgroundColor: Colors.white,
+            radius: 48,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            "@social handle",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
