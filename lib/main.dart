@@ -22,7 +22,6 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return Material(
       child: Column(
         children: [
@@ -41,19 +40,38 @@ class LandingPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          SizedBox(
-              width: width > 680 ? 680 : width * 0.95,
-              child: FlatButton(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                onPressed: () {},
-                child: Text(
-                  "Instagram",
-                  style: TextStyle(fontSize: 16),
-                ),
-                color: Colors.tealAccent,
-              ))
+          ButtonLink(title: "Instagram"),
+          ButtonLink(title: "Twitter"),
         ],
       ),
+    );
+  }
+}
+
+class ButtonLink extends StatelessWidget {
+  const ButtonLink({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: SizedBox(
+          width: width > 680 ? 680 : width * 0.95,
+          child: FlatButton(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            onPressed: () {},
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 16),
+            ),
+            color: Colors.tealAccent,
+          )),
     );
   }
 }
