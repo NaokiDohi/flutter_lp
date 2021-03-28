@@ -25,24 +25,28 @@ class LandingPage extends StatelessWidget {
     return Material(
       child: Column(
         children: [
-          SizedBox(
-            height: 35,
-          ),
+          SizedBox(height: 35),
           CircleAvatar(
             backgroundImage: NetworkImage(imageUrl),
             backgroundColor: Colors.white,
             radius: 48,
           ),
-          SizedBox(
-            height: 12,
-          ),
+          SizedBox(height: 12),
           Text(
             "@social handle",
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,
             ),
-          )
+          ),
+          SizedBox(height: 20),
+          SizedBox(
+              width: 450,
+              child: FlatButton(
+                onPressed: () {},
+                child: Text("Instagram"),
+                color: Colors.tealAccent,
+              ))
         ],
       ),
     );
