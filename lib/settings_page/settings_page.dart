@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lp/settings_page/button_settings_section.dart';
 import 'package:flutter_lp/settings_page/preview_section.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -10,12 +11,7 @@ class SettingsPage extends StatelessWidget {
       body: Row(
         children: [
           // Displayed on screen in a 3:2 ratio
-          Expanded(
-            flex: 3,
-            child: Container(
-              color: Colors.blueGrey.shade50,
-            ),
-          ),
+          ButtonSettingsSection(),
           PreviewSection(),
         ],
       ),
