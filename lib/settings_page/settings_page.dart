@@ -11,10 +11,11 @@ class SettingsPage extends StatelessWidget {
         children: [
           // Displayed on screen in a 3:2 ratio
           Expanded(
-              flex: 3,
-              child: Container(
-                color: Colors.blueGrey.shade50,
-              )),
+            flex: 3,
+            child: Container(
+              color: Colors.blueGrey.shade50,
+            ),
+          ),
           PreviewSection(),
         ],
       ),
