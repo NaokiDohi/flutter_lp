@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lp/constant.dart';
 
 class ButtonSettingsSection extends StatelessWidget {
   const ButtonSettingsSection({
@@ -32,7 +33,37 @@ class ButtonSettingsSection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                )
+                ),
+                SizedBox(height: 30),
+                SizedBox(
+                  width: constraints.maxWidth * 0.6,
+                  height: constraints.maxHeight * 0.5,
+                  child: ReorderableListView(
+                    children: [
+                      for (var document in documents)
+                        ListTile(
+                          contentPadding: EdgeInsets.symmetric(vertical: 8),
+                          title: Text(document.title),
+                          key: Key(document.title),
+                          leading: Icon(Icons.drag_indicator),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.delete),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                    onReorder: (oldIndex, newIndex) {},
+                  ),
+                ),
               ],
             ),
           );
