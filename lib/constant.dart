@@ -1,4 +1,4 @@
-import 'package:flutter_lp/link_data.dart';
+import 'package:flutter_lp/models/link_data.dart';
 
 final documents = [
   LinkData(

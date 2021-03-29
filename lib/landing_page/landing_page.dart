@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lp/button_link.dart';
+import 'package:flutter_lp/landing_page/button_link.dart';
 import 'package:flutter_lp/constant.dart';
-import 'package:flutter_lp/footer.dart';
+import 'package:flutter_lp/landing_page/footer.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key key}) : super(key: key);

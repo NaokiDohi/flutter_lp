@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lp/settings_page/preview_section.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key key}) : super(key: key);
@@ -14,11 +15,7 @@ class SettingsPage extends StatelessWidget {
               child: Container(
                 color: Colors.blueGrey.shade50,
               )),
-          Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.white,
-              )),
+          PreviewSection(),
         ],
       ),
     );
