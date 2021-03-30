@@ -4,6 +4,11 @@ A new Flutter project.
 
 ## Getting Started
 
+Docker commands below are for firebase cli.
+
+1.  docker build . -t firebase
+2.  docker run -it -p 9005:9005 -v $(pwd):/app firebase /bin/bash
+
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
