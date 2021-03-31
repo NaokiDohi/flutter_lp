@@ -7,7 +7,12 @@ A new Flutter project.
 Docker commands below are for firebase cli.
 
 1.  docker build . -t firebase
-2.  docker run -it -p 9005:9005 -v $(pwd):/app firebase /bin/bash
+2.  docker run -it -p 9005:9005 -v $(pwd):/app firebase  
+    firebase login  
+    firebase init  
+    exit
+3.  docker run -it -p 8080:8080 -v $(pwd):/app firebase  
+    firebase emulators:sart
 
 This project is a starting point for a Flutter application.
 
