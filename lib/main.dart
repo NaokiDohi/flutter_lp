@@ -1,9 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lp/landing_page/landing_page.dart';
 import 'package:flutter_lp/settings_page/settings_page.dart';
 import 'package:flutter_lp/not_found_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseFirestore.instance.settings = Settings(
+    host: 'localhost:8080',
+    sslEnabled: false,
+    persistenceEnabled: false,
+  );
   runApp(MyApp());
 }
 
