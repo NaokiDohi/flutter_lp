@@ -38,6 +38,11 @@ class LandingPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
+                if (_documents.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 58.0),
+                    child: Text('Whoops, have not added some links.'),
+                  ),
                 for (var document in _documents)
                   ButtonLink(
                     title: document.title,
