@@ -26,23 +26,36 @@ class AddButton extends StatelessWidget {
               return AlertDialog(
                 title: Text('Add new button'),
                 content: Form(
-                    child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Title',
-                        hintText: 'Your media',
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          hintText: 'Your media',
+                        ),
                       ),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Link',
-                        hintText: 'Your link',
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Link',
+                          hintText: 'Your link',
+                        ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  ),
+                ),
+                actions: [
+                  FlatButton(
+                    onPressed: () {},
+                    child: Text('Add'),
+                    textColor: Colors.blue,
+                  ),
+                  FlatButton(
+                    onPressed: () {},
+                    child: Text('Cancel'),
+                    textColor: Colors.blue,
+                  ),
+                ],
               );
             },
           );
