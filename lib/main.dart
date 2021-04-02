@@ -25,25 +25,28 @@ class MyApp extends StatelessWidget {
         return LinkData.fromMap(doc.data());
       }).toList();
     });
-    return StreamProvider<List<LinkData>>(
-      create: (context) => userLinkDataStream,
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return Provider<CollectionReference>(
+      create: (context) => linksCollection,
+      child: StreamProvider<List<LinkData>>(
+        create: (context) => userLinkDataStream,
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => LandingPage(),
+            '/settings': (context) => SettingsPage(),
+          },
+          onUnknownRoute: (settings) {
+            return MaterialPageRoute(
+              builder: (context) {
+                return NotFoundPage();
+              },
+            );
+          },
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LandingPage(),
-          '/settings': (context) => SettingsPage(),
-        },
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(
-            builder: (context) {
-              return NotFoundPage();
-            },
-          );
-        },
       ),
     );
   }
