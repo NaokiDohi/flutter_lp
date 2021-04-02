@@ -10,6 +10,8 @@ class AddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _titleTextController = TextEditingController();
+    TextEditingController _urlTextController = TextEditingController();
     return SizedBox(
       width: width,
       child: FlatButton(
@@ -30,12 +32,20 @@ class AddButton extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextFormField(
+                        controller: _titleTextController,
+                        validator: (value) {
+                          return value.isEmpty ? 'Please add in a title' : null;
+                        },
                         decoration: InputDecoration(
                           labelText: 'Title',
                           hintText: 'Your media',
                         ),
                       ),
                       TextFormField(
+                        controller: _urlTextController,
+                        validator: (value) {
+                          return value.isEmpty ? 'Please add in a url' : null;
+                        },
                         decoration: InputDecoration(
                           labelText: 'Link',
                           hintText: 'Your link',
@@ -46,7 +56,10 @@ class AddButton extends StatelessWidget {
                 ),
                 actions: [
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print(_titleTextController.text);
+                      print(_urlTextController.text);
+                    },
                     child: Text('Add'),
                     textColor: Colors.blue,
                   ),
