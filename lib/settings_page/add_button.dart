@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_lp/models/link_data.dart';
 import 'package:provider/provider.dart';
 
 class AddButton extends StatelessWidget {
@@ -65,16 +66,15 @@ class AddButton extends StatelessWidget {
                       if (_formKey.currentState.validate()) {
                         // Validates every [FormField] that is a descendant of this [Form],
                         // and returns true if there are no errors.
-                        _linksCollection.add({
-                          'title': _titleTextController.text,
-                          'url': _urlTextController.text,
-                        });
+                        _linksCollection.add(
+                          LinkData(
+                            title: _titleTextController.text,
+                            url: _urlTextController.text,
+                          ).toMap(),
+                        );
                         Navigator.of(context).pop();
                         _formKey.currentState.reset();
                       }
-
-                      print(_titleTextController.text);
-                      print(_urlTextController.text);
                     },
                     child: Text('Add'),
                     textColor: Colors.blue,

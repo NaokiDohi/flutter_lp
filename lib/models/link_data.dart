@@ -10,6 +10,16 @@ class LinkData {
   });
 
   factory LinkData.fromMap(Map<String, dynamic> data) {
-    return LinkData(title: data['title'], url: data['url']);
+    return LinkData(
+      title: data['title'],
+      url: data['url'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'url': url,
+    };
   }
 }
