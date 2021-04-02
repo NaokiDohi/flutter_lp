@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lp/landing_page/landing_page.dart';
+import 'package:flutter_lp/login_page/login_page.dart';
 import 'package:flutter_lp/models/link_data.dart';
 import 'package:flutter_lp/settings_page/settings_page.dart';
 import 'package:flutter_lp/not_found_page.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => LandingPage(),
           '/settings': (context) => SettingsPage(),
+          '/login': (context) => LoginPage(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
