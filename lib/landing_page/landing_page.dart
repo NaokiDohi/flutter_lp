@@ -12,6 +12,10 @@ class LandingPage extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('links').snapshots(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Page Loader
+            return Center(child: CircularProgressIndicator());
+          }
           return Material(
             child: Column(
               children: [
