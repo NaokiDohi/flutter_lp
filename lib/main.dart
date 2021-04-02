@@ -40,24 +40,20 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: '/settings',
+        initialRoute: '/',
         onGenerateRoute: (settings) {
-          print(settings.name);
           return MaterialPageRoute(
             builder: (context) {
+              // settings.nameで/settingsなどのルートがみれる
               return RouteController(settingsName: settings.name);
             },
           );
         },
-        // routes: {
-        //   '/': (context) => LandingPage(),
-        //   '/settings': (context) => SettingsPage(),
-        //   '/login': (context) => LoginPage(),
-        // },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
             builder: (context) {
