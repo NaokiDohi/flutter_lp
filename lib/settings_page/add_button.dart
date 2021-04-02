@@ -12,6 +12,7 @@ class AddButton extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController _titleTextController = TextEditingController();
     TextEditingController _urlTextController = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
     return SizedBox(
       width: width,
       child: FlatButton(
@@ -28,6 +29,7 @@ class AddButton extends StatelessWidget {
               return AlertDialog(
                 title: Text('Add new button'),
                 content: Form(
+                  key: _formKey,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -57,6 +59,12 @@ class AddButton extends StatelessWidget {
                 actions: [
                   FlatButton(
                     onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        // Validates every [FormField] that is a descendant of this [Form],
+                        // and returns true if there are no errors.
+                        Navigator.of(context).pop();
+                        _formKey.currentState.reset();
+                      }
                       print(_titleTextController.text);
                       print(_urlTextController.text);
                     },
