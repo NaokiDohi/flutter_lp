@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lp/landing_page/button_link.dart';
 import 'package:flutter_lp/constant.dart';
 import 'package:flutter_lp/landing_page/footer.dart';
+import 'package:flutter_lp/models/link_data.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key key}) : super(key: key);
@@ -16,6 +17,9 @@ class LandingPage extends StatelessWidget {
             // Page Loader
             return Center(child: CircularProgressIndicator());
           }
+          final _documents = snapshot.data.docs.map((doc) {
+            return LinkData.fromMap(doc.data());
+          }).toList();
           return Material(
             child: Column(
               children: [
@@ -34,7 +38,7 @@ class LandingPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                for (var document in documents)
+                for (var document in _documents)
                   ButtonLink(
                     title: document.title,
                     url: document.url,
