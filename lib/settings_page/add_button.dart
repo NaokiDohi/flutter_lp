@@ -51,7 +51,7 @@ class AddButton extends StatelessWidget {
                     textColor: Colors.blue,
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).pop(),
                     child: Text('Cancel'),
                     textColor: Colors.blue,
                   ),
