@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddButton extends StatelessWidget {
   const AddButton({
@@ -62,9 +63,14 @@ class AddButton extends StatelessWidget {
                       if (_formKey.currentState.validate()) {
                         // Validates every [FormField] that is a descendant of this [Form],
                         // and returns true if there are no errors.
+                        FirebaseFirestore.instance.collection('links').add({
+                          'title': _titleTextController.text,
+                          'url': _urlTextController.text,
+                        });
                         Navigator.of(context).pop();
                         _formKey.currentState.reset();
                       }
+
                       print(_titleTextController.text);
                       print(_urlTextController.text);
                     },
