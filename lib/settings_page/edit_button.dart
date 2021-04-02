@@ -60,16 +60,26 @@ class EditButton extends StatelessWidget {
               actions: [
                 FlatButton(
                   onPressed: () {
+                    // 変更があればtrueを返すなければfalseを返す
+                    final userChangedTitle =
+                        document.title != _titleTextController.text;
+                    final userChangedUrl =
+                        document.url != _urlTextController.text;
+                    // ||はORの意味 どちらかが変更されればtrueを返し変更がなければfalseを返す
+                    final userUpdateForm = userChangedTitle || userChangedUrl;
                     if (_formKey.currentState.validate()) {
                       // Validates every [FormField] that is a descendant of this [Form],
                       // and returns true if there are no errors.
-                      final newlinkData = LinkData(
-                        title: _titleTextController.text,
-                        url: _urlTextController.text,
-                      );
-                      _linksCollection.doc(document.id).update(
-                            newlinkData.toMap(),
-                          );
+                      if (userUpdateForm) {
+                        final newlinkData = LinkData(
+                          title: _titleTextController.text,
+                          url: _urlTextController.text,
+                        );
+                        _linksCollection.doc(document.id).update(
+                              newlinkData.toMap(),
+                            );
+                      }
+                      print('updates is $userUpdateForm');
                       Navigator.of(context).pop();
                       _formKey.currentState.reset();
                     }
