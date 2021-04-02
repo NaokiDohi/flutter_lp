@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LinkData {
   final String title;
   final String url;
+  final String id;
 
   LinkData({
     @required this.title,
     @required this.url,
+    this.id,
   });
 
-  factory LinkData.fromMap(Map<String, dynamic> data) {
+  factory LinkData.fromDocument(QueryDocumentSnapshot data) {
     return LinkData(
-      title: data['title'],
-      url: data['url'],
+      title: data.data()['title'],
+      url: data.data()['url'],
+      id: data.id,
     );
   }
 
