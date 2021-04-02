@@ -14,16 +14,18 @@ class EditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _linksCollection = Provider.of<CollectionReference>(context);
-    TextEditingController _titleTextController = TextEditingController(
-      text: document.title,
-    );
-    TextEditingController _urlTextController = TextEditingController(
-      text: document.url,
-    );
     final _formKey = GlobalKey<FormState>();
+    // TextControllerがここにあると入力してボタンを押さずにフォームを閉じても
+    // 次に開いた時にその変更がフォーム上に残っている。
     return IconButton(
       icon: Icon(Icons.edit),
       onPressed: () {
+        TextEditingController _titleTextController = TextEditingController(
+          text: document.title,
+        );
+        TextEditingController _urlTextController = TextEditingController(
+          text: document.url,
+        );
         showDialog(
           context: context,
           builder: (context) {
