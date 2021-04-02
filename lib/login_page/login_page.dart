@@ -71,9 +71,19 @@ class LoginPage extends StatelessWidget {
                           final _email = _emailController.text;
                           final _password = _passwordController.text;
                           if (_formKey.currentState.validate()) {
-                            FirebaseAuth.instance.signInWithEmailAndPassword(
-                              email: _email,
-                              password: _password,
+                            FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                  email: _email,
+                                  password: _password,
+                                )
+                                .then(
+                                  (_) => Navigator.of(context)
+                                      .pushNamed('/settings'),
+                                )
+                                .catchError(
+                              (error) {
+                                showErrorDialog(context, error);
+                              },
                             );
                           }
                         },
@@ -91,6 +101,26 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> showErrorDialog(BuildContext context, error) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Oh Snap!'),
+          content: Text(error.message),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Dissmiss'),
+            )
+          ],
+        );
+      },
     );
   }
 }
