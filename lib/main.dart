@@ -8,12 +8,12 @@ import 'package:flutter_lp/not_found_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  FirebaseFirestore.instance.settings = Settings(
-    host: 'localhost:8080',
-    sslEnabled: false,
-    persistenceEnabled: false,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // FirebaseFirestore.instance.settings = Settings(
+  //   host: 'localhost:8080',
+  //   sslEnabled: false,
+  //   persistenceEnabled: false,
+  // );
   runApp(MyApp());
 }
 

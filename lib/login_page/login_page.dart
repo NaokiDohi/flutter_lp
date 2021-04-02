@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -67,7 +68,14 @@ class LoginPage extends StatelessWidget {
                       width: double.infinity,
                       child: FlatButton(
                         onPressed: () {
-                          _formKey.currentState.validate();
+                          final _email = _emailController.text;
+                          final _password = _passwordController.text;
+                          if (_formKey.currentState.validate()) {
+                            FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: _email,
+                              password: _password,
+                            );
+                          }
                         },
                         child: Text(
                           'Login',
