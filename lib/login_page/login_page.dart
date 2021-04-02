@@ -31,7 +31,13 @@ class LoginPage extends StatelessWidget {
                     TextFormField(
                       controller: _emailController,
                       validator: (value) {
-                        return value.isEmpty ? 'Please add in a title' : null;
+                        if (value.isEmpty) {
+                          return 'Please add in your email';
+                        } else if (!isValidEmail(value)) {
+                          return 'Please add in a valid email';
+                        } else {
+                          return null;
+                        }
                       },
                       decoration: InputDecoration(
                         labelText: 'Email',
@@ -42,7 +48,14 @@ class LoginPage extends StatelessWidget {
                       obscureText: true, // パスワードを隠す
                       controller: _passwordController,
                       validator: (value) {
-                        return value.isEmpty ? 'Please add in a url' : null;
+                        if (value.isEmpty) {
+                          return 'You forgot your password';
+                        } else if (value.length < 6) {
+                          // 制限が6なのはFirebaseAuthの最小が6だから
+                          return 'Password must be at least six characters';
+                        } else {
+                          return null;
+                        }
                       },
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -53,7 +66,9 @@ class LoginPage extends StatelessWidget {
                       height: 40,
                       width: double.infinity,
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _formKey.currentState.validate();
+                        },
                         child: Text(
                           'Login',
                           style: TextStyle(color: Colors.white),
@@ -70,4 +85,11 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+}
+
+bool isValidEmail(String email) {
+  // Emailならtrueが返される。
+  return RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(email);
 }
