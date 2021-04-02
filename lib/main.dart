@@ -1,10 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lp/landing_page/landing_page.dart';
 import 'package:flutter_lp/login_page/login_page.dart';
 import 'package:flutter_lp/models/link_data.dart';
 import 'package:flutter_lp/settings_page/settings_page.dart';
 import 'package:flutter_lp/not_found_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
     });
     return MultiProvider(
       providers: [
+        StreamProvider<User>(
+          create: (context) => FirebaseAuth.instance.authStateChanges(),
+        ),
         Provider<CollectionReference>(
           create: (context) => linksCollection,
         ),
@@ -40,12 +44,20 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LandingPage(),
-          '/settings': (context) => SettingsPage(),
-          '/login': (context) => LoginPage(),
+        initialRoute: '/settings',
+        onGenerateRoute: (settings) {
+          print(settings.name);
+          return MaterialPageRoute(
+            builder: (context) {
+              return RouteController(settingsName: settings.name);
+            },
+          );
         },
+        // routes: {
+        //   '/': (context) => LandingPage(),
+        //   '/settings': (context) => SettingsPage(),
+        //   '/login': (context) => LoginPage(),
+        // },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
             builder: (context) {
@@ -55,5 +67,32 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class RouteController extends StatelessWidget {
+  final String settingsName;
+  const RouteController({
+    Key key,
+    @required this.settingsName,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // サーバに存在するユーザーであればtrueを返す
+    final userSignedIn = Provider.of<User>(context) != null;
+    // ユーザーが存在せずルートが/settingsの時ログインページにリダイレクトする。
+    final notSignedInGoSettings = !userSignedIn && settingsName == '/settings';
+    // ユーザーが存在しルートが/settingsの時セッティングページにリダイレクトする。
+    final signedInGoSettings = userSignedIn && settingsName == '/settings';
+    if (settingsName == '/') {
+      return LandingPage();
+    } else if (notSignedInGoSettings || settingsName == '/login') {
+      return LoginPage();
+    } else if (signedInGoSettings) {
+      return SettingsPage();
+    } else {
+      return NotFoundPage();
+    }
   }
 }
