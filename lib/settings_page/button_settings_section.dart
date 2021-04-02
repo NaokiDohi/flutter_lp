@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lp/models/link_data.dart';
 import 'package:flutter_lp/settings_page/add_button.dart';
+import 'package:flutter_lp/settings_page/edit_button.dart';
 import 'package:flutter_lp/settings_page/delete_button.dart';
 import 'package:provider/provider.dart';
 
@@ -46,10 +47,7 @@ class ButtonSettingsSection extends StatelessWidget {
                           leading: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {},
-                              ),
+                              EditButton(document: document),
                               DeleteButton(document: document),
                             ],
                           ),
