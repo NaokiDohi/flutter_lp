@@ -13,13 +13,40 @@ class AddButton extends StatelessWidget {
     return SizedBox(
       width: width,
       child: FlatButton(
-        onPressed: () {},
         child: Text('Add button'),
         color: Colors.greenAccent.shade400,
         padding: EdgeInsets.symmetric(vertical: 25),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Add new button'),
+                content: Form(
+                    child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Title',
+                        hintText: 'Your media',
+                      ),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Link',
+                        hintText: 'Your link',
+                      ),
+                    ),
+                  ],
+                )),
+              );
+            },
+          );
+        },
       ),
     );
   }
