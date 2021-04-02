@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lp/models/link_data.dart';
 import 'package:flutter_lp/settings_page/add_button.dart';
+import 'package:flutter_lp/settings_page/delete_button.dart';
 import 'package:provider/provider.dart';
 
 class ButtonSettingsSection extends StatelessWidget {
@@ -46,32 +47,10 @@ class ButtonSettingsSection extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               IconButton(
-                                onPressed: () {},
                                 icon: Icon(Icons.edit),
+                                onPressed: () {},
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text(
-                                            'Are you sure you want to delete the ${document.title} button ?'),
-                                        content: Text(
-                                            'The deleted links are not retrievable.'),
-                                        actions: [
-                                          FlatButton(
-                                            child: Text('Dlete'),
-                                            color: Colors.redAccent,
-                                            onPressed: () {},
-                                          )
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                icon: Icon(Icons.delete),
-                              ),
+                              DeleteButton(document: document),
                             ],
                           ),
                         ),
