@@ -16,8 +16,8 @@ class ButtonSettingsSection extends StatelessWidget {
     final _documents = Provider.of<List<LinkData>>(context);
     return ChangeNotifierProxyProvider0<LinkNotifier>(
       create: (context) => LinkNotifier(),
-      update: (_, LinkNotifier) {
-        return LinkNotifier..update(_documents);
+      update: (_, linkNotifier) {
+        return linkNotifier..update(_documents);
       },
       child: Expanded(
         flex: 3,
