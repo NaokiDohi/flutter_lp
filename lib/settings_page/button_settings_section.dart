@@ -53,7 +53,10 @@ class ButtonSettingsSection extends StatelessWidget {
                           ),
                         ),
                     ],
-                    onReorder: (oldIndex, newIndex) {},
+                    onReorder: (oldIndex, newIndex) {
+                      // デフォルトで動いた後はnewIndexは+2される
+                      if (oldIndex < newIndex) newIndex -= 1;
+                    },
                   ),
                 ),
               ],
