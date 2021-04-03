@@ -13,62 +13,64 @@ class ButtonSettingsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _documents = Provider.of<List<LinkData>>(context);
-    return Expanded(
-      flex: 3,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth * 0.6;
-          if (_documents == null) {
-            // Page Loader
-            return Center(child: CircularProgressIndicator());
-          }
-          var reorderableListView = ReorderableListView(
-            children: [
-              for (var document in _documents)
-                ListTile(
-                  contentPadding: EdgeInsets.symmetric(vertical: 8),
-                  title: Text(document.title),
-                  key: Key(document.title),
-                  leading: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      EditButton(document: document),
-                      DeleteButton(document: document),
-                    ],
-                  ),
-                ),
-            ],
-            onReorder: onReorder,
-          );
-          return Container(
-            color: Colors.blueGrey.shade50,
-            child: Column(
+    return ChangeNotifierProxyProvider0<LinkNotifier>(
+      create: (context) => LinkNotifier(),
+      update: (_, LinkNotifier) {
+        return LinkNotifier..update(_documents);
+      },
+      child: Expanded(
+        flex: 3,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final _linkNotifier = Provider.of<LinkNotifier>(context);
+            final width = constraints.maxWidth * 0.6;
+            if (_documents == null) {
+              // Page Loader
+              return Center(child: CircularProgressIndicator());
+            }
+            var reorderableListView = ReorderableListView(
               children: [
-                SizedBox(height: 40),
-                Text(
-                  'Your Links',
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-                SizedBox(height: 100),
-                AddButton(width: width),
-                SizedBox(height: 30),
-                SizedBox(
-                  width: width,
-                  height: constraints.maxHeight * 0.5,
-                  child: reorderableListView,
-                ),
+                for (var document in _linkNotifier.currentLinkList)
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(vertical: 8),
+                    title: Text(document.title),
+                    key: Key(document.title),
+                    leading: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        EditButton(document: document),
+                        DeleteButton(document: document),
+                      ],
+                    ),
+                  ),
               ],
-            ),
-          );
-        },
+              onReorder: _linkNotifier.onReorder,
+            );
+            return Container(
+              color: Colors.blueGrey.shade50,
+              child: Column(
+                children: [
+                  SizedBox(height: 40),
+                  Text(
+                    'Your Links',
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                  SizedBox(height: 100),
+                  AddButton(width: width),
+                  SizedBox(height: 30),
+                  SizedBox(
+                    width: width,
+                    height: constraints.maxHeight * 0.5,
+                    child: reorderableListView,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
-}
-
-void onReorder(oldIndex, newIndex) {
-  // デフォルトで動いた後はnewIndexは+2される
-  if (oldIndex < newIndex) newIndex -= 1;
 }
 
 class LinkNotifier extends ChangeNotifier {
