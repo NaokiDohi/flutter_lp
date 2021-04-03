@@ -91,7 +91,8 @@ class LinkNotifier extends ChangeNotifier {
 
     for (var document in _workingList) {
       final index = _workingList.indexOf(document);
-      batch.update(document, {'position': index});
+      batch.update(document.documentReference, {'position': index});
     }
+    batch.commit();
   }
 }
