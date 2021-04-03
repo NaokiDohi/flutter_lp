@@ -22,6 +22,24 @@ class ButtonSettingsSection extends StatelessWidget {
             // Page Loader
             return Center(child: CircularProgressIndicator());
           }
+          var reorderableListView = ReorderableListView(
+            children: [
+              for (var document in _documents)
+                ListTile(
+                  contentPadding: EdgeInsets.symmetric(vertical: 8),
+                  title: Text(document.title),
+                  key: Key(document.title),
+                  leading: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      EditButton(document: document),
+                      DeleteButton(document: document),
+                    ],
+                  ),
+                ),
+            ],
+            onReorder: onReorder,
+          );
           return Container(
             color: Colors.blueGrey.shade50,
             child: Column(
@@ -37,27 +55,7 @@ class ButtonSettingsSection extends StatelessWidget {
                 SizedBox(
                   width: width,
                   height: constraints.maxHeight * 0.5,
-                  child: ReorderableListView(
-                    children: [
-                      for (var document in _documents)
-                        ListTile(
-                          contentPadding: EdgeInsets.symmetric(vertical: 8),
-                          title: Text(document.title),
-                          key: Key(document.title),
-                          leading: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              EditButton(document: document),
-                              DeleteButton(document: document),
-                            ],
-                          ),
-                        ),
-                    ],
-                    onReorder: (oldIndex, newIndex) {
-                      // デフォルトで動いた後はnewIndexは+2される
-                      if (oldIndex < newIndex) newIndex -= 1;
-                    },
-                  ),
+                  child: reorderableListView,
                 ),
               ],
             ),
@@ -65,5 +63,25 @@ class ButtonSettingsSection extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+void onReorder(oldIndex, newIndex) {
+  // デフォルトで動いた後はnewIndexは+2される
+  if (oldIndex < newIndex) newIndex -= 1;
+}
+
+class LinkNotifier extends ChangeNotifier {
+  List<LinkData> _workingList;
+
+  update(List<LinkData> userLinks) => _workingList = userLinks;
+
+  List<LinkData> get currentLinkList => _workingList;
+
+  void onReorder(oldIndex, newIndex) {
+    // デフォルトで動いた後はnewIndexは+2される
+    if (oldIndex < newIndex) newIndex -= 1;
+    final pickedLink = _workingList.removeAt(oldIndex);
+    _workingList.insert(newIndex, pickedLink);
   }
 }
